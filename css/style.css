@@ -20,6 +20,7 @@ body{
 .title{
     color: rgb(3, 158, 3);
     font-size: 30px;
+    
 }
 
 .btn{
@@ -66,8 +67,18 @@ main{
 }
 
 
-#main__bienvenida h2{
+.bienvenida{
+    font-size: 90px;
+    padding: 5px;
+    height: 40px;
+    color: white;
+    display: flex ;
+    justify-content: center;
+    align-items: center;  
+}
 
+
+.bienvenida h2{
     font-size: 60px;
     padding: 5px;
     height: 40px;
@@ -75,8 +86,13 @@ main{
     color: white;
     display: flex ;
     justify-content: center;
-    align-items: center;    
-    
+    align-items: center;   
+    transition: background-color, 2s;
+}
+
+.bienvenida h2:hover{
+    background: red;
+    width: 100%;
 }
 
 .container{
