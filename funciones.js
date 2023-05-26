@@ -1,54 +1,83 @@
 // Definir funciones esenciales
-function sumar(a, b) {
-    return a + b;
+// Funciones esenciales
+// Variables globales
+var almacenamiento = localStorage;
+
+// Funciones esenciales
+function sumar() {
+  var numeros = obtenerNumeros();
+  var resultado = 0;
+  for (var i = 0; i < numeros.length; i++) {
+    resultado += numeros[i];
+  }
+  mostrarResultado("El resultado de la suma es: " + resultado);
 }
 
-  function restar(a, b) {
-    return a - b;
+function restar() {
+  var numeros = obtenerNumeros();
+  var resultado = numeros[0];
+  for (var i = 1; i < numeros.length; i++) {
+    resultado -= numeros[i];
+  }
+  mostrarResultado("El resultado de la resta es: " + resultado);
 }
 
-  function multiplicar(a, b) {
-    return a * b;
+function multiplicar() {
+  var numeros = obtenerNumeros();
+  var resultado = 1;
+  for (var i = 0; i < numeros.length; i++) {
+    resultado *= numeros[i];
+  }
+  mostrarResultado("El resultado de la multiplicación es: " + resultado);
 }
 
-  function dividir(a, b) {
-    if (b !== 0) {
-      return a / b;
+function dividir() {
+  var numeros = obtenerNumeros();
+  var resultado = numeros[0];
+  for (var i = 1; i < numeros.length; i++) {
+    if (numeros[i] !== 0) {
+      resultado /= numeros[i];
     } else {
-      return "Error: división por cero";
+      mostrarResultado("Error: división por cero");
+      return;
     }
+  }
+  mostrarResultado("El resultado de la división es: " + resultado);
 }
 
-  // Capturar eventos y procesar simulador
-  function procesarSimulador() {
-    // Obtener valores de entrada
-    var num1 = parseInt(document.getElementById('num1').value);
-    var num2 = parseInt(document.getElementById('num2').value);
-
-    // Realizar operaciones
-    var suma = sumar(num1, num2);
-    var resta = restar(num1, num2);
-    var multiplicacion = multiplicar(num1, num2);
-    var division = dividir(num1, num2);
-
-    // Mostrar resultados en el DOM
-    document.getElementById('resultadoSuma').innerHTML = "Suma: " + suma;
-    document.getElementById('resultadoResta').innerHTML = "Resta: " + resta;
-    document.getElementById('resultadoMultiplicacion').innerHTML = "Multiplicación: " + multiplicacion;
-    document.getElementById('resultadoDivision').innerHTML = "División: " + division;
-
-    // Almacenar datos en el storage
-    localStorage.setItem('num1', num1);
-    localStorage.setItem('num2', num2);
+// Obtener números utilizando prompts
+function obtenerNumeros() {
+  var cantidad = parseInt(prompt("Ingrese la cantidad de números:"));
+  var numeros = [];
+  for (var i = 0; i < cantidad; i++) {
+    var valor = parseInt(prompt("Ingrese el número " + (i + 1) + ":"));
+    numeros.push(valor);
+  }
+  return numeros;
 }
 
-  // Cargar datos almacenados
-  window.onload = function() {
-    var num1 = localStorage.getItem('num1');
-    var num2 = localStorage.getItem('num2');
+// Mostrar resultado en el DOM
+function mostrarResultado(mensaje) {
+  var resultadoDiv = document.createElement("div");
+  resultadoDiv.textContent = mensaje;
+  resultadoDiv.className = "resultado";
+  document.getElementById("resultados").appendChild(resultadoDiv);
+}
 
-    document.getElementById('num1').value = num1;
-    document.getElementById('num2').value = num2;
+// Almacenar y recuperar datos en el storage
+function almacenarDatos() {
+  var clave = prompt("Ingrese la clave:");
+  var valor = prompt("Ingrese el valor:");
+  almacenamiento.setItem(clave, valor);
+  alert("Datos almacenados correctamente.");
+}
 
-    procesarSimulador(); // Procesar simulador al cargar la página
+function recuperarDatos() {
+  var clave = prompt("Ingrese la clave de los datos a recuperar:");
+  var valor = almacenamiento.getItem(clave);
+  if (valor) {
+    alert("El valor almacenado es: " + valor);
+  } else {
+    alert("No se encontraron datos para la clave ingresada.");
+  }
 }
