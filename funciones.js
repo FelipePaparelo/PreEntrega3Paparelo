@@ -1,83 +1,68 @@
-// Definir funciones esenciales
-// Funciones esenciales
-// Variables globales
-var almacenamiento = localStorage;
+// Definir eventos y funciones de respuesta
+document.addEventListener("DOMContentLoaded", cargarPagina);
+
+function cargarPagina() {
+  // Agregar eventos a los botones del menú
+  document.getElementById("sumarBtn").addEventListener("click", sumar);
+  document.getElementById("restarBtn").addEventListener("click", restar);
+  document.getElementById("multiplicarBtn").addEventListener("click", multiplicar);
+  document.getElementById("dividirBtn").addEventListener("click", dividir);
+
+  // Recuperar datos almacenados en el storage, si existen
+  let resultadoGuardado = localStorage.getItem("resultado");
+  if (resultadoGuardado) {
+    mostrarResultado(resultadoGuardado);
+  }
+}
 
 // Funciones esenciales
 function sumar() {
-  var numeros = obtenerNumeros();
-  var resultado = 0;
-  for (var i = 0; i < numeros.length; i++) {
-    resultado += numeros[i];
-  }
-  mostrarResultado("El resultado de la suma es: " + resultado);
+  let num1 = prompt("Ingrese el primer número:");
+  let num2 = prompt("Ingrese el segundo número:");
+
+  let resultado = parseFloat(num1) + parseFloat(num2);
+
+  // Almacenar resultado en el storage
+  localStorage.setItem("resultado", resultado);
+
+  mostrarResultado(resultado);
 }
 
 function restar() {
-  var numeros = obtenerNumeros();
-  var resultado = numeros[0];
-  for (var i = 1; i < numeros.length; i++) {
-    resultado -= numeros[i];
-  }
-  mostrarResultado("El resultado de la resta es: " + resultado);
+  let num1 = prompt("Ingrese el primer número:");
+  let num2 = prompt("Ingrese el segundo número:");
+
+  let resultado = parseFloat(num1) - parseFloat(num2);
+
+  localStorage.setItem("resultado", resultado);
+
+  mostrarResultado(resultado);
 }
 
 function multiplicar() {
-  var numeros = obtenerNumeros();
-  var resultado = 1;
-  for (var i = 0; i < numeros.length; i++) {
-    resultado *= numeros[i];
-  }
-  mostrarResultado("El resultado de la multiplicación es: " + resultado);
+  let num1 = prompt("Ingrese el primer número:");
+  let num2 = prompt("Ingrese el segundo número:");
+
+  let resultado = parseFloat(num1) * parseFloat(num2);
+
+  localStorage.setItem("resultado", resultado);
+
+  mostrarResultado(resultado);
 }
 
 function dividir() {
-  var numeros = obtenerNumeros();
-  var resultado = numeros[0];
-  for (var i = 1; i < numeros.length; i++) {
-    if (numeros[i] !== 0) {
-      resultado /= numeros[i];
-    } else {
-      mostrarResultado("Error: división por cero");
-      return;
-    }
-  }
-  mostrarResultado("El resultado de la división es: " + resultado);
+  let num1 = prompt("Ingrese el primer número:");
+  let num2 = prompt("Ingrese el segundo número:");
+
+  let resultado = parseFloat(num1) / parseFloat(num2);
+
+  localStorage.setItem("resultado", resultado);
+
+  mostrarResultado(resultado);
 }
 
-// Obtener números utilizando prompts
-function obtenerNumeros() {
-  var cantidad = parseInt(prompt("Ingrese la cantidad de números:"));
-  var numeros = [];
-  for (var i = 0; i < cantidad; i++) {
-    var valor = parseInt(prompt("Ingrese el número " + (i + 1) + ":"));
-    numeros.push(valor);
-  }
-  return numeros;
-}
-
-// Mostrar resultado en el DOM
-function mostrarResultado(mensaje) {
-  var resultadoDiv = document.createElement("div");
-  resultadoDiv.textContent = mensaje;
-  resultadoDiv.className = "resultado";
-  document.getElementById("resultados").appendChild(resultadoDiv);
-}
-
-// Almacenar y recuperar datos en el storage
-function almacenarDatos() {
-  var clave = prompt("Ingrese la clave:");
-  var valor = prompt("Ingrese el valor:");
-  almacenamiento.setItem(clave, valor);
-  alert("Datos almacenados correctamente.");
-}
-
-function recuperarDatos() {
-  var clave = prompt("Ingrese la clave de los datos a recuperar:");
-  var valor = almacenamiento.getItem(clave);
-  if (valor) {
-    alert("El valor almacenado es: " + valor);
-  } else {
-    alert("No se encontraron datos para la clave ingresada.");
-  }
+// Mostrar resultado en la página
+function mostrarResultado(resultado) {
+  let output = document.getElementById("output");
+  output.textContent = "El resultado es: " + resultado;
 }
