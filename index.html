@@ -1,30 +1,41 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="./funciones.js"></script>
+  <link rel="stylesheet" href="estilo.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <!--Sweetalert-->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link href="sweetalert2.min.css">
+  <title>Proyecto</title>
 </head>
-<style>
-  #output {
-    margin-top: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-  }
-</style>
 <body>
-  <h1>Simulador de Operaciones Matemáticas</h1>
-  
-  <div id="menu">
-    <button id="sumarBtn">Sumar</button>
-    <button id="restarBtn">Restar</button>
-    <button id="multiplicarBtn">Multiplicar</button>
-    <button id="dividirBtn">Dividir</button>
+  <h1 class="bienvenida">Hola! bienvenido a Paparelo Sports</h1>
+  <div id="reloj"></div>
+  <div>
+    <a href="./archivos.html/cuenta.html" class="button2">REGISTRATE</a>
   </div>
-  
-  <div id="output"></div>
-  
-  <script src="script.js"></script>
+  <div class="inicio-carro">
+    <div class="modal-carrito">
+        <h3>Carrito</h3>
+        <div id="carrito-contenedor">
+
+        </div>
+        <p class="precioProducto">Precio Total $<span id="precioTotal">0</span></p>
+        <button id="vaciarcarro" class="botonAgregar">Vaciar Carrito</button>
+        <button id="finCompra">Finalizar compra</button>
+    </div>    
+  </div>
+  <div id="producto"></div>
+  <input type="button" value="Presione aqui para ver los productos", id="btn", onclick="this.disabled = true" >
+  <!--Toastify-->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <main id="ropaDeportiva"></main>
+
+  <!--Proyecto-->
+
+  <script src="proyecto.js"></script>
 </body>
 </html>
