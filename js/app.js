@@ -38,7 +38,7 @@ const citaObj = {
 
 
 function datosCita(e) {
-    //  console.log(e.target.name) // Obtener el Input
+    
      citaObj[e.target.name] = e.target.value;
 }
 
