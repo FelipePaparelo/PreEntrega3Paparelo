@@ -29,9 +29,35 @@ function agregarCita(e) {
   const sintomas = sintomasInput.value;
 
   if (mascota === '' || propietario === '' || telefono === '' || fecha === '' || hora === '' || sintomas === '') {
-    ui.imprimirAlerta('Todos los campos son obligatorios', 'error');
+    Swal.fire({
+      title: "Error",
+      text: "Llena todos los campos para realizar tu solicitud",
+      icon: "error",
+      buttons: true,
+      dangerMode: true,
+    })
+      .then((isOkay) => {
+        if (isOkay) {
+          form.submit();
+          window.location.reload();
+        }
+      });
     return;
   }
+
+  Swal.fire({
+    title: "Perfecto",
+    text: "La solicitud ha sido aceptada!",
+    icon: "success",
+    buttons: true,
+    dangerMode: true,
+  })
+    .then((isOkay) => {
+      if (isOkay) {
+        form.submit();
+        window.location.reload();
+      }
+    });
 
   const cita = {
     id: Date.now(),
@@ -45,10 +71,8 @@ function agregarCita(e) {
 
   administrarCitas.agregarCita(cita);
 
-  ui.imprimirAlerta('Cita agregada correctamente');
 
   ui.imprimirCitas(administrarCitas.getCitas());
-
   nuevaCitaForm.reset();
 }
 
@@ -71,5 +95,18 @@ function eliminarCita(id) {
     });
 }
 
-export default administrarCitas;
+let url = 'https://jsonplaceholder.typicode.com/users/';
+fetch(url)
+  .then(response => response.json())
+  .then(data => mostrarData(data))
+  .catch(error => console.log(error));
 
+const mostrarData = (data) => {
+  let body = ""
+  for (var i = 0; i < 1; i++) {
+    body += `<td>${data[i].name}</td>`
+  }
+  document.getElementById('medico').innerHTML = body;
+}
+
+export default administrarCitas;
